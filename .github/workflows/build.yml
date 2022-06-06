@@ -20,8 +20,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: crazy-max/ghaction-chocolatey@v2
       - name: install boost
-        run: choco install make boost-msvc-12
+        uses: crazy-max/ghaction-chocolatey@v2
+        with:
+          args: install make boost-msvc-12
       - name: make
         run: make
