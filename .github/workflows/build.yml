@@ -7,13 +7,21 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  test-build-linux:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: install boost
       run: sudo apt-get install -y build-essential libboost-filesystem-dev libboost-system-dev
     - name: make
       run: make
+
+  test-build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: crazy-max/ghaction-chocolatey@v2
+      - name: install boost
+        run: choco install make boost-msvc-12
+      - name: make
+        run: make
