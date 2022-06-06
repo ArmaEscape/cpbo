@@ -20,9 +20,5 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: install boost
-        uses: crazy-max/ghaction-chocolatey@v2
-        with:
-          args: install make boost-msvc-12
-      - name: make
-        run: make
+      - name: build
+        run: msbuild cpbo2.sln
