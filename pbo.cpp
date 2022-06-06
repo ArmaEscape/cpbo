@@ -18,6 +18,7 @@ MA  02110-1301  USA
 
 #include <stdint.h>
 #include <time.h>
+#include <iostream>
 typedef int64_t filetime_t;
 
 // PBO functionality
@@ -207,7 +208,7 @@ void createDirs(char *fname) {
   }
 
   catch (const filesystem_error& ex) {
-    cout << ex.what() << '\n';
+    std::cout << ex.what() << '\n';
   }
 }
 
@@ -382,8 +383,8 @@ bool pboEx(char *sf, char *dd, bool overwrite, bool gui) {
       if(ret != IDYES)
     #else
       char in;
-      cout << str << endl;
-      cin >> in;
+      std::cout << str << endl;
+      std::cin >> in;
       if(in != 'Y' && in != 'y')
     #endif
       return true; // Abort cleanly
@@ -399,7 +400,7 @@ bool pboEx(char *sf, char *dd, bool overwrite, bool gui) {
       fputs(prefix, fo);
       fclose(fo);
     } else
-      cout << "Cannot open: " << oname << endl;
+      std::cout << "Cannot open: " << oname << endl;
   }
 
   // Extract files
@@ -523,13 +524,13 @@ int getDirFiles(char *sd, FTENTRY *ftable, int *fti, char excludes[EX_NUM][EX_LE
           }
         }
       } else
-        cout << p << " is not a directory\n";
+        std::cout << p << " is not a directory\n";
     } else
-      cout << p << " does not exist\n";
+      std::cout << p << " does not exist\n";
   }
 
   catch (const filesystem_error& ex) {
-    cout << ex.what() << '\n';
+    std::cout << ex.what() << '\n';
   }
 
   return count;
@@ -542,7 +543,7 @@ bool pboPack(char *sd, char *df, bool overwrite) {
   memset(excludes, 0, EX_NUM*EX_LEN);
   char exname[FNAMELEN];
   sprintf(exname, "%s/%s", sd, EXCLUDEFILE); // FIX FOR WINDOWS
-  cout << path(sd) << endl;
+  std::cout << path(sd) << endl;
   FILE *ef = fopen(exname, "rb");
   int eidx = 0;
   if(ef) {
@@ -588,8 +589,8 @@ bool pboPack(char *sd, char *df, bool overwrite) {
       if(ret != IDYES)
     #else
       char in;
-      cout << str << endl;
-      cin >> in;
+      std::cout << str << endl;
+      std::cin >> in;
       if(in != 'Y' && in != 'y')
     #endif
       return true; // Abort cleanly
